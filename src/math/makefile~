@@ -5,7 +5,7 @@ targetName =../libs/libphymath.a
 $(targetName):$(OBJS)
 	ar crv -o $(targetName) $(OBJS)
 $(OBJS): $(OBJS:%.o=%.cpp) $(OBJS:%.o=%.h)
-	$(cc) $(CFLAGS) $< -o $@
+	$(cc) $(CFLAGS) -o $(OBJS) $(OBJS:%.o=%.cpp)
 clean:
 	rm -f *.o
 
