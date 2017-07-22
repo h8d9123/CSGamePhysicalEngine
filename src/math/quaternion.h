@@ -22,6 +22,9 @@ namespace phy{
 			j *= d;
 			k *= d;
 		}
+	Quaternion(real r, real i, real j, real k):r(r),i(i), j(j),k(k){};
+	Quaternion(real data[4]):r(data[0]), i(data[1]), j(data[2]), k(data[3]){};
+	Quaternion(const Quaternion &q) {r =q.r; i = q.i, j = q.j; k = q.k;};
 	Quaternion  operator +(const Quaternion&);
 	Quaternion  operator -(const Quaternion&);
 	Quaternion  operator *(const Quaternion&);

@@ -19,3 +19,9 @@ void Quaternion::operator *=(const Quaternion& q){
 	k= q1.r*q.k + q1.k*q.r + q1.i*q.j - q1.j*q.i;
 
 }
+Quaternion Quaternion::operator +(const Quaternion & q1){
+	return Quaternion(r+q1.r, i+q1.i, j+q1.j, k+q1.k);
+}
+Quaternion Quaternion:: operator -(const Quaternion & q1){
+	return Quaternion(r-q1.r, i-q1.i, j-q1.j, k-q1.k);
+}
