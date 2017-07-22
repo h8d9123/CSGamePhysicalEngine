@@ -5,27 +5,31 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/BriefTestProgressListener.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
-#include "vector3.h"
-
+#include "quaternion.h"
+using namespace std;
+using namespace phy;
 class Test:public CPPUNIT_NS::TestCase{
 	CPPUNIT_TEST_SUITE(Test);
 	CPPUNIT_TEST(testHelloWorld);
-	CPPUNIT_TEST(testVector3Add);
+	CPPUNIT_TEST(testquaternionadd);
 	CPPUNIT_TEST_SUITE_END();
 	public:
 	void setUp(void){}
 	void tearDown(void){}
 	protected:
 	void testHelloWorld(void){std::cout<<"hello"<<std::endl;}
-	void testVector3Add(){
-		phy::Vector3 v(1,2,3);
-		v=v+v;
+	void testquaternionadd(){
+		Quaternion q1(1,2,3,4);
+		//cout<<q1.r<<","<<q1.i<<","<<q1.j<<","<<q1.k<<endl;
+		q1+=q1;
+		//cout<<q1.r<<","<<q1.i<<","<<q1.j<<","<<q1.k<<endl;
+		q1 = q1+q1;
+		//cout<<q1.r<<","<<q1.i<<","<<q1.j<<","<<q1.k<<endl;
 		bool flag = false;
-		for(int i=0;i<3;i++){
-			if(v.x==2 && v.y == 4 && v.z==6)
-				flag=true;
-		}
-		CPPUNIT_ASSERT(flag);
+	
+		if(q1.r==4&&q1.i==8&&q1.j==12&&q1.k==16) flag=true;
+		//cout<<q1.r<<q1.i<<q1.j<<q1.k<<endl;
+		CPPUNIT_ASSERT_EQUAL(flag,true);
 	}
 };
 
