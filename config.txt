@@ -1,0 +1,5 @@
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig
+#add pkg_config file
+    #-rw-r--r--. 1 root root 223 Apr  7 04:57 glew.pc
+    #-rw-r--r--. 1 root root 349 Apr  7 00:15 glfw3.pc
+    #-rw-r--r--. 1 root root 217 Apr  7 05:16 glu.pc
