@@ -1,3 +1,4 @@
+//g++ main3.cpp `pkg-config --cflags --libs glew` `pkg-config --libs glew` `pkg-config --cflags glfw3` `pkg-config --static --libs glfw3` -lGL -lGLEW
 #include <iostream>
 using std::cout;
 using std::endl;
