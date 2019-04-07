@@ -32,4 +32,7 @@ physical engine
         -lGL
     eg. 
         g++ main2.cpp `pkg-config --cflags glfw3` `pkg-config --static --libs glfw3` -lGL
-
+4.install glu
+    ./configure;make;sudo make install
+5.install glut
+    sudo yum install freeglut freeglut-devel
