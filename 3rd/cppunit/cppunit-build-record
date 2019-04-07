@@ -1,0 +1,7 @@
+config 添加了$Libs=" ... -ldl", 25818??
+设置 lib共享目录，/usr/local/lib写入/etc/ld.conf.so 
+然后运行 sudo ldconfig
+copy -R include/cppunit /usr/include
+
+file:///home/wanghz/.local/share/Trash/files/cppunit-1.12.1/include/cppunit 
+
