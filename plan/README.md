@@ -12,7 +12,7 @@ plans for csgame
 2)基础
     1）学习opengl, makefile,lua
     2) 学习《游戏物理引擎开发》
-    3）学习cocox的源码
+    3）学习cocox的源码,blender
     4）了解swig
     5) 学习机器学习，深度学习
 3)测试框架
