@@ -1,0 +1,26 @@
+1.opengl需要把所有数据都放到缓存对象（buffer object）, 相当与服务端内存区域
+2.顶点着色器可以有多个，但是同一时刻只能有一个其作用
+3.图元装配：描述顶点如何组成图元
+4.光栅化：图元-->候选的像素（可能会被剔除）
+5.着色阶段数据传输方式：
+    1）类似全局变量，是着色器的特殊变量
+    2）但是和应用程序中的全局变量无关
+    3) uniform变量是程序和着色器交流数据用的
+6.glsl
+    1）类C语法，
+    2) main() 无返回值，无输入参数
+    3）变量：
+        a.变量不可有连续但下划线（glsl保留）
+        b.不能数字或下划线开头
+        c.作用域和C类似
+        d.声明必须初始化
+        e.double值，必须加LF. eg 1.00000010001F
+        f.类型转换（int <- uint; float<-int, uint; double <-int,uint, float
+7.1)glGenBuffers(bufCnt, buff[]); 
+    只生成名称数组（或许该函数应该叫glGenBufferIds)
+  2)glBindBuffer()s创建buffer对象，但是不分配具体存储空间
+    CreateBufferObjWithId(bufferId).
+  3)glBufferData() 分配储存空间, 
+    initBufferWithData(data);
+    data多了就重新分配， data少就缩小空间(当新对象重新分配到这个bufferId)
+  
