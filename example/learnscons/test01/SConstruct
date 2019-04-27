@@ -1,0 +1,7 @@
+#usage scons
+
+#create .o file
+#Object("main.c")
+
+#create application
+Program('main.c')
