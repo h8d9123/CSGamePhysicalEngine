@@ -1,0 +1,4 @@
+#usage scons -Q
+import glob
+#create library
+Object(glob.glob('*.c'))

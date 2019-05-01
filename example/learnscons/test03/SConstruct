@@ -1,0 +1,7 @@
+#usage scons -Q
+import glob
+#create library
+Library('sayhello', glob.glob('say*.c'))
+Program(target = 'sayhello', 
+        source = ['main.c'], 
+        parse_flags = "-L ./ -lsayhello")

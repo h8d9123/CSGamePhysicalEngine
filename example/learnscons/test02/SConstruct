@@ -1,0 +1,7 @@
+#usage scons -Q
+import glob
+
+#create application
+Program('sayhello', glob.glob('*.c'))
+#Or 
+#Program('sayhello', ['sayhello1.c', 'sayhello2.c', 'main.c'])
