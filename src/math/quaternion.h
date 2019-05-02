@@ -1,4 +1,5 @@
 #pragma once
+#include<math.h>
 #include "vector3.h"
 namespace phy{
 	class Quaternion{

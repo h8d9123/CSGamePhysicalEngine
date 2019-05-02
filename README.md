@@ -36,3 +36,10 @@ physical engine
     ./configure;make;sudo make install
 5.install glut
     sudo yum install freeglut freeglut-devel
+6.github
+    修改/etc/hosts
+    192.30.253.113 github.com
+
+    ref:https://blog.csdn.net/ITleaks/article/details/80351680
+    nslookup github.com
+    http://tool.chinaz.com/dns/
