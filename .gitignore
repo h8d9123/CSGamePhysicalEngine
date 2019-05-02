@@ -6,6 +6,8 @@
 *.lo
 *.o
 *.obj
+#compiled Object files with scons
+*.os
 
 # Precompiled Headers
 *.gch
