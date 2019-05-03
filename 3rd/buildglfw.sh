@@ -1,4 +1,15 @@
 #!/bin/bash
+if [ $OS_NAME = "CentOS" ];then
+    sudo yum install libXrandr libXrandr-devel
+    sudo yum install libXinerama libXinerama-devel
+    sudo yum install libXcursor libXcursor-devel
+fi
+
+#if [ $OS_NAME = "Ubuntu" ];then
+#    sudo apt-get install libXrandr libXrandr-devel
+#    sudo apt-get install libXinerama libXinerama-devel
+#    sudo apt-get install libXcursor libXcursor-devel
+#fi
 if [ -z $1 ];then
     echo "ERROR: GLEW name show be given."
     exit -1
