@@ -43,5 +43,7 @@ mesa-19.0.0
 **/local/glu
 **/local/glfw
 **/local/mesa
+**/configs/*.pc
+**/libs/lib*
 
 
