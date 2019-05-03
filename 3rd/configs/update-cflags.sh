@@ -24,4 +24,5 @@ do
         export CPLUS_INCLUDE_PATH=$dirname:$CPLUS_INCLUDE_PATH
     fi
 done < flags.log
+rm flags.log
 export CPLUS_INCLUDE_PATH
