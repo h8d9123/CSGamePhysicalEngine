@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ $OS_NAME = "CentOS" ];then
-    yum-builddep mesa
+    suod yum-builddep mesa
 fi
 if [ $OS_NAME = "Ubuntu" ];then
     apt-get build-dep mesa
