@@ -43,3 +43,7 @@ physical engine
     ref:https://blog.csdn.net/ITleaks/article/details/80351680
     nslookup github.com
     http://tool.chinaz.com/dns/
+7.glfwhint()
+    https://stackoverflow.com/questions/39213757/glfw-cannot-create-a-window-glx-failed-to-create-context-glxbadfbconfig
+    glxinfo|grep version
+    lspci|grep VGA

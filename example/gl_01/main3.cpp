@@ -5,9 +5,13 @@ using std::endl;
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+void glfwErroCb(int error, const char*desc)
+{
+    std::cerr<<"GLFW error:"<<error<<"--"<<desc<<std::endl;
+}
 int main()
 { 
+    glfwSetErrorCallback(glfwErroCb);
     // init GLFW
     int initflag=glfwInit();
     if (!initflag)
@@ -20,8 +24,8 @@ int main()
     // set window hints
     //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
     //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2); 
-    //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     // create the window
     GLFWwindow * window = glfwCreateWindow(800, 600, "First window", NULL, NULL); 

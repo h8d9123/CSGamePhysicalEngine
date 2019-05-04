@@ -5,6 +5,10 @@
 #include <GLFW/glfw3.h>
 #define CS_NS_START namespace cs { 
 #define CS_NS_END }
+void glfwErroCb(int error, const char*desc)
+{
+    std::cerr<<"GLFW error:"<<error<<"--"<<desc<<std::endl;
+}
 
 CS_NS_START
 
@@ -44,6 +48,7 @@ CS_NS_END
 
 int main(int argc, char* argv[])
 {
+    glfwSetErrorCallback(glfwErroCb);
     if (!glfwInit()) {cs::error("glfwInit fail!"); return -1;}
     //create a window
     GLFWwindow *window = glfwCreateWindow(cs::window_width, 
