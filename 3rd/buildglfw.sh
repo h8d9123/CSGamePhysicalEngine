@@ -5,13 +5,11 @@ if [ $OS_NAME = "CentOS" ];then
     sudo yum install libXcursor libXcursor-devel
 fi
 
-#if [ $OS_NAME = "Ubuntu" ];then
-#    sudo apt-get install libXrandr libXrandr-devel
-#    sudo apt-get install libXinerama libXinerama-devel
-#    sudo apt-get install libXcursor libXcursor-devel
-#fi
+if [ $OS_NAME = "Ubuntu" ];then
+    sudo apt-get -y install xorg-dev
+fi
 if [ -z $1 ];then
-    echo "ERROR: GLEW name show be given."
+    echo "ERROR: GLFW name show be given."
     exit -1
 fi
 GLFW_NAME=$1 
