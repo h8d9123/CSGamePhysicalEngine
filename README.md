@@ -1,49 +1,34 @@
-# CSGamePhysicalEngine
-physical engine 
-1.config glew
-   1)install dependency
-    sudo yum install libXmu-devel libXi-devel libGL-devel
-   2)make
-    make;sudo make intall;make clean;
-2.config glfw
-    1)install depdency for x11 (if need)
-    sudo yum install libXrandr libXrandr-devel
-    sudo yum install libXinerama libXinerama-devel
-    sudo yum install libXcursor libXcursor-devel
-    2) build(in glfw-root)
-    mkdir build
-    cd build
-    cmake ..
-    make 
-    sudo make install
-    3)result
-    Installing: /usr/local/include/GLFW
-    -- Up-to-date: /usr/local/include/GLFW/glfw3.h
-    -- Up-to-date: /usr/local/lib/cmake/glfw3/glfw3Config.cmake
-    -- Up-to-date: /usr/local/lib/cmake/glfw3/glfw3ConfigVersion.cmake
-    -- Up-to-date: /usr/local/lib/cmake/glfw3/glfw3Targets.cmake
-    -- Up-to-date: /usr/local/lib/cmake/glfw3/glfw3Targets-noconfig.cmake
-    -- Up-to-date: /usr/local/lib/pkgconfig/glfw3.pc
-    -- Up-to-date: /usr/local/lib/libglfw3.a
-3.using glfw
-    cc flags for glfw:
-        `pkg-config --cflags glfw3` `pkg-config --static --libs glfw3`
-    cc flags for opengl:
-        -lGL
-    eg. 
-        g++ main2.cpp `pkg-config --cflags glfw3` `pkg-config --static --libs glfw3` -lGL
-4.install glu
-    ./configure;make;sudo make install
-5.install glut
-    sudo yum install freeglut freeglut-devel
-6.github
-    修改/etc/hosts
-    192.30.253.113 github.com
+1.mesa and opengl
+    1.vmware 12 supportes opengl3.3 
+      https://www.mesa3d.org/vmware-guest.html
+      a)vmwgfx >2.9.0
+      b)mesa with the upeated svga gallium driver
+    otherwise Opengl2.1 is supported.
+    2.vmware 15 ...
+2.mesa and scons
+    https://www.mesa3d.org/install.html
+    scons:
+        a) python >2.7 or 3.5
+        b) scons, mako. (pip install xxx)
+        c) option:
+            virtuenv
+        d).... xxxx>=xx.xxx
+3.mesa and meson
+    python >3.5
+    meson(pip install meson)
+    ninja
+    xxx >= xxxx.xxx
+    ....
+4.core profile file:
+    vmware 12 + CentOS 7.6
+    > glxinfo -B
 
-    ref:https://blog.csdn.net/ITleaks/article/details/80351680
-    nslookup github.com
-    http://tool.chinaz.com/dns/
-7.glfwhint()
-    https://stackoverflow.com/questions/39213757/glfw-cannot-create-a-window-glx-failed-to-create-context-glxbadfbconfig
-    glxinfo|grep version
-    lspci|grep VGA
+    ....
+    ....
+        Max core profile version: 0.0 (!!!!!! not support Core Poofile Mode)
+        Max compat profile version: 2.1 (!!!!!! Just 2.1)
+        OpenGL version string: 2.1 Mesa 18.0.5 (!!!!!! OpenGL 2.1)
+    ....
+    
+
+
