@@ -23,19 +23,22 @@ class CSShaderBase
 {
 public:
     CSShaderBase() {}
-    CSShaderBase(const char* fileName, GLenum shaderType, bool isFile);
-    CSShaderBase(const GLchar* pShaderString, GLenum shaderType);
-    int state(std::string msg);
+    CSShaderBase(const char* fileName, GLenum shaderType);
+    void attachProgram(GLuint programId);
+    int state(std::string msg) {return m_state;}
     ~CSShaderBase() {}
 private:
+    void createShader(const GLchar* pShaderString, GLenum shaderType);
     GLboolean compile();
 
 private:
     GLuint m_shaderId;
+    GLuint m_programId;
     int m_state;
 public:
     enum {
         SUCCESS,
+        INVALID_DEFAULT,
         INVALID_SHADER_TYPE,
         INVALID_SHADER_CONTENT,
         INVALID_SHADER_FILE,

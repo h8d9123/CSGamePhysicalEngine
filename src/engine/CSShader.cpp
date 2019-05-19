@@ -16,7 +16,8 @@
  * @param fileName a shader filename
  * @param shaderType Specifies the type of shader to be created. @see glCreateShader
  */
-CSShaderBase::CSShaderBase(const char* fileName, GLenum shaderType, bool isFile)
+CSShaderBase::CSShaderBase(const char* fileName, GLenum shaderType)
+    :m_state(INVALID_DEFAULT)
 {
     std::string shaderStr;
     std::ifstream hFile;
@@ -35,7 +36,7 @@ CSShaderBase::CSShaderBase(const char* fileName, GLenum shaderType, bool isFile)
         m_state = CSShaderBase::INVALID_SHADER_FILE;
         return;
     }
-    CSShaderBase(shaderStr.c_str(), shaderType);
+    createShader(shaderStr.c_str(), shaderType);
 }
 
 
@@ -44,14 +45,14 @@ CSShaderBase::CSShaderBase(const char* fileName, GLenum shaderType, bool isFile)
  * @param pShaderString a pointer to Shader Content.
  * @param shaderType Specifies the type of shader to be created. @see glCreateShader
  */
-CSShaderBase::CSShaderBase(const GLchar* pShaderString, GLenum shaderType)
+ void
+CSShaderBase::createShader(const GLchar* pShaderString, GLenum shaderType)
 { 
     if (!pShaderString) 
     {
         m_state = CSShaderBase::INVALID_SHADER_CONTENT;
         return;
     }
-
     //create shader
     m_shaderId = glCreateShader(shaderType);
     if (!m_shaderId) 
@@ -59,7 +60,6 @@ CSShaderBase::CSShaderBase(const GLchar* pShaderString, GLenum shaderType)
         m_state = CSShaderBase::INVALID_SHADER_TYPE;
         return;
     }
-
     //copy string to shader
     glShaderSource(m_shaderId, 1, &pShaderString, NULL);
 
@@ -69,6 +69,7 @@ CSShaderBase::CSShaderBase(const GLchar* pShaderString, GLenum shaderType)
         m_state = CSShaderBase::FAIL_COMPILE_FILE;
         return;
     }
+    m_state = SUCCESS;
 }
 /**
  * @brief to compile a shader 
@@ -89,5 +90,9 @@ CSShaderBase::compile()
     }
     return success;
 }
-
+void
+CSShaderBase::attachProgram(GLuint programId)
+{
+    glAttachShader(programId, m_shaderId);
+}
 

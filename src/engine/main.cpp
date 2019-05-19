@@ -5,6 +5,9 @@
 #include <GLFW/glfw3.h>
 #define CS_NS_START namespace cs { 
 #define CS_NS_END }
+
+extern bool createTriangle(GLuint &vbo, GLuint &progId);
+
 void glfwErroCb(int error, const char*desc)
 {
     std::cerr<<"GLFW error:"<<error<<"--"<<desc<<std::endl;
@@ -50,6 +53,13 @@ int main(int argc, char* argv[])
 {
     glfwSetErrorCallback(glfwErroCb);
     if (!glfwInit()) {cs::error("glfwInit fail!"); return -1;}
+
+    //set hint status
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); 
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
     //create a window
     GLFWwindow *window = glfwCreateWindow(cs::window_width, 
                                           cs::window_height,
@@ -77,9 +87,17 @@ int main(int argc, char* argv[])
     glViewport(0,0,cs::window_width, cs::window_height);
     glfwSetFramebufferSizeCallback(window, cs::framebuffer_size_callback);
     cs::clearWindow();
+    GLuint vao;
+    GLuint progId;
+    createTriangle(vao, progId);
     while(!glfwWindowShouldClose(window))
     {
         cs::processInput(window);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glUseProgram(progId);
+        glBindVertexArray(vao);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        
         glfwSwapBuffers(window);
         //process event
         glfwPollEvents();
