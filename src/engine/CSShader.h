@@ -4,7 +4,6 @@
  * @file CSShader.h
  * @brief shader classes
  * @author wanghzh
- * @email 2466621355@qq.com
  * @version 1.0
  * @date   Sun Apr 21 19:27:43 PDT 2019
  */
@@ -22,7 +21,6 @@
  *@class GLShader
  *@brief wraps glxxxShaderxxx function
  *@author wanghzh
- *@email 2466621355@qq.com
  *@version 1.0
  *@date 2019-06-08
  */

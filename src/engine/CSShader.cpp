@@ -1,8 +1,6 @@
 /**
  * @file CSShader.cpp
  * @brief
- * @detail
- * @detail
  * @author wanghzh
  * @version 1.0
  * @date Sun Apr 21 20:00:03 PDT 2019
@@ -13,7 +11,7 @@
 
 /**
  *@brief constructor
- *@param Specifies the type of shader to be created.
+ *@param shaderType Specifies the type of shader to be created.
  *@see GLShader::getShaderType()
  *@note  GL_COMPUTE_SHADER is available if gl >= 4.3
  */
@@ -131,7 +129,7 @@ GLShader::compile()
 
 /**
  *@brief set shader source code with a file
- *@param src specifies shader file
+ *@param pathName specifies shader file
  */
 void
 GLShader::setSourceFile(const std::string &pathName)
@@ -170,8 +168,7 @@ GLShader::setSource(const std::string &src)
 
 
 /**
- *@brief set shader source code
- *@param src specifies source code
+ *@brief get shader object id
  */
 GLuint
 GLShader::getShaderId()
