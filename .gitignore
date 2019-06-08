@@ -45,5 +45,5 @@ mesa-19.0.0
 **/local/mesa
 **/configs/*.pc
 **/libs/lib*
-
+**/doc/autodoc
 
