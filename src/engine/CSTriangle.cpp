@@ -1,15 +1,17 @@
 #include <GL/glew.h>
 #include "CSShader.h"
+
 bool createTriangle(GLuint &VAO, GLuint &progId)
 {
-    CSShaderBase vs("triangle.vs", GL_VERTEX_SHADER);
-    CSShaderBase fs("triangle.fs", GL_FRAGMENT_SHADER);
+    GLShader vs(GL_VERTEX_SHADER);
+    vs.setSourceFile("triangle.vs");
+    if(!vs.compile()) std::cout<<"vs fail"<<std::endl;
+    GLShader fs(GL_FRAGMENT_SHADER);
+    fs.setSourceFile("triangle.fs");
+    if(!fs.compile()) std::cout<<"fs fail"<<std::endl;
     progId = glCreateProgram();
-    std::string msg;
-    vs.attachProgram(progId);
-    std::cout<<vs.state(msg)<<std::endl;
-    fs.attachProgram(progId);
-    std::cout<<fs.state(msg)<<std::endl;
+    glAttachShader(progId, vs.getShaderId());
+    glAttachShader(progId, fs.getShaderId());
     glLinkProgram(progId);
 
     // check for linking errors

@@ -12,19 +12,136 @@
 
 
 /**
- * @brief create and compile a shader
- * @param fileName a shader filename
- * @param shaderType Specifies the type of shader to be created. @see glCreateShader
+ *@brief constructor
+ *@param Specifies the type of shader to be created.
+ *@see GLShader::getShaderType()
+ *@note  GL_COMPUTE_SHADER is available if gl >= 4.3
  */
-CSShaderBase::CSShaderBase(const char* fileName, GLenum shaderType)
-    :m_state(INVALID_DEFAULT)
+GLShader::GLShader(GLenum shaderType)
+{
+    m_id = glCreateShader(shaderType);
+}
+
+
+/**
+ *@brief get shader type.
+ *@note GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER, GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER, GL_FRAGMENT_SHADER, or GL_COMPUTE_SHADER. 
+ */
+GLenum
+GLShader::getShaderType()
+{
+    GLint param;
+    glGetShaderiv(m_id, GL_SHADER_TYPE, &param);
+    return param;
+}
+
+/**
+ *@brief get status whether the shader is deleted.
+ *@return true if the shader is deleted, otherwise false.
+ */
+bool
+GLShader::isDeleted()
+{
+    GLint param;
+    glGetShaderiv(m_id, GL_DELETE_STATUS, &param);
+    return (bool)param;
+}
+
+/**
+ *@brief get status whether the shader is compiled successfully.
+ *@return true if the shader is compiled, otherwise false.
+ */
+bool
+GLShader::isCompiled()
+{
+    GLint param;
+    glGetShaderiv(m_id, GL_COMPILE_STATUS, &param);
+    return (bool)param;
+}
+
+/**
+ *@brief get length of the infomation log.
+ *@return length of log if it has log, otherwise 0.
+ */
+GLint
+GLShader::getLogLength()
+{
+    GLint param;
+    glGetShaderiv(m_id, GL_INFO_LOG_LENGTH, &param);
+    return param;
+}
+
+
+/**
+ *@brief get length of the shader source code.
+ *@return length of source code if it has source, otherwise 0.
+ */
+GLint
+GLShader::getSourceLength()
+{
+    GLint param;
+    glGetShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &param);
+    return param;
+}
+
+
+/**
+ *@brief get detail infomation after shader is compiled. 
+ *@param log specifies string that is used to return detail infomation.
+ */
+void
+GLShader::getLog(std::string &log)
+{
+    if (!log.empty()) log.clear();
+    char msg[1024];
+    int len= 0;
+    glGetShaderInfoLog(m_id, 1024, &len, msg);
+    log = msg;
+}
+
+
+/**
+ *@brief get shader source code. 
+ *@param log specifies string that is used to return source code.
+ */
+void
+GLShader::getSource(std::string& src)
+{
+    if (!src.empty()) src.clear();
+    int maxL = getSourceLength();
+    char srcStr[maxL];
+    int len = 0;
+    glGetShaderSource(m_id, maxL, &len, srcStr);
+    src = srcStr;
+}
+
+
+/**
+ *@brief compiles shader. 
+ *@return true if shader is compiled successfully, otherwise false.
+ *@note using getLog() to get more information. 
+ */
+bool
+GLShader::compile()
+{
+    glCompileShader(m_id);
+    return isCompiled();
+}
+
+
+/**
+ *@brief set shader source code with a file
+ *@param src specifies shader file
+ */
+void
+GLShader::setSourceFile(const std::string &pathName)
 {
     std::string shaderStr;
     std::ifstream hFile;
     hFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
     try
     {
-        hFile.open(fileName);
+        hFile.open(pathName);
         std::stringstream ss;
         ss << hFile.rdbuf();
         hFile.close();
@@ -33,66 +150,31 @@ CSShaderBase::CSShaderBase(const char* fileName, GLenum shaderType)
     catch (std::ifstream::failure e)
     {
         std::cout<<"Fail to read shader file!"<<std::endl;
-        m_state = CSShaderBase::INVALID_SHADER_FILE;
         return;
     }
-    createShader(shaderStr.c_str(), shaderType);
+    const GLchar* p = shaderStr.c_str();
+    glShaderSource(m_id, 1, &p, NULL);
 }
-
 
 /**
- * @brief create and compile a shader
- * @param pShaderString a pointer to Shader Content.
- * @param shaderType Specifies the type of shader to be created. @see glCreateShader
+ *@brief set shader source code
+ *@param src specifies source code
  */
- void
-CSShaderBase::createShader(const GLchar* pShaderString, GLenum shaderType)
-{ 
-    if (!pShaderString) 
-    {
-        m_state = CSShaderBase::INVALID_SHADER_CONTENT;
-        return;
-    }
-    //create shader
-    m_shaderId = glCreateShader(shaderType);
-    if (!m_shaderId) 
-    {
-        m_state = CSShaderBase::INVALID_SHADER_TYPE;
-        return;
-    }
-    //copy string to shader
-    glShaderSource(m_shaderId, 1, &pShaderString, NULL);
-
-    //compile shader string
-    if(!compile())
-    {
-        m_state = CSShaderBase::FAIL_COMPILE_FILE;
-        return;
-    }
-    m_state = SUCCESS;
-}
-/**
- * @brief to compile a shader 
- * @return GL_TRUE if the shader was compiled successfully, and GL_FALSE otherWise.
- */
-GLboolean
-CSShaderBase::compile()
-{
-    if(!m_shaderId) return GL_FALSE;
-    glCompileShader(m_shaderId);
-    int success;
-    glGetShaderiv(m_shaderId, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        char infoLog[1024];
-        glGetShaderInfoLog(m_shaderId, 1024, NULL, infoLog);
-        std::cout<<infoLog<<std::endl;
-    }
-    return success;
-}
 void
-CSShaderBase::attachProgram(GLuint programId)
+GLShader::setSource(const std::string &src)
 {
-    glAttachShader(programId, m_shaderId);
+
+    const GLchar* p = src.c_str();
+    glShaderSource(m_id, 1, &p, NULL);
 }
 
+
+/**
+ *@brief set shader source code
+ *@param src specifies source code
+ */
+GLuint
+GLShader::getShaderId()
+{
+    return m_id;
+}
