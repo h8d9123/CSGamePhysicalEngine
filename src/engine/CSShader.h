@@ -39,6 +39,8 @@ public:
     void getSource(std::string& src);
     bool compile();
     GLuint getShaderId();
+    GLuint setShaderId(GLuint shaderId);
+    bool isShader();
     
 private:
     GLuint m_id;

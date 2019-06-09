@@ -166,12 +166,33 @@ GLShader::setSource(const std::string &src)
     glShaderSource(m_id, 1, &p, NULL);
 }
 
-
 /**
- *@brief get shader object id
+ *@return get shader object id
  */
 GLuint
 GLShader::getShaderId()
 {
     return m_id;
+}
+
+
+/**
+ *@brief set shader object id
+ *@pragma shaderId a shader object id
+ *@return the old shader object id.
+ */
+GLuint
+GLShader::setShaderId(GLuint shaderId)
+{
+    GLuint id = m_id;
+    m_id = shaderId;
+    return id;
+}
+/*
+ * @return ref. glIsShader() 
+ */
+bool
+GLShader::isShader()
+{
+    return glIsShader(m_id);
 }
