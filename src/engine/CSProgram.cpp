@@ -14,6 +14,7 @@ GLProgram::GLProgram()
  */
 void GLProgram::attach(GLuint shaderId)
 {
+    assert(glIsShader(shaderId));
     glAttachShader(m_id, shaderId);
 }
 
@@ -281,6 +282,7 @@ GLProgram::link()
 void
 GLProgram::use()
 {
+    assert(!isDeleted());
     glUseProgram(m_id);
 }
 

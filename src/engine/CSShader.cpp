@@ -20,6 +20,18 @@ GLShader::GLShader(GLenum shaderType)
     m_id = glCreateShader(shaderType);
 }
 
+/**
+ *@brief constructor
+ *@param shaderType Specifies the type of shader to be created.
+ *@param pathName Specifies the type of shader to be created.
+ *@see GLShader::getShaderType()
+ *@note  GL_COMPUTE_SHADER is available if gl >= 4.3
+ */
+GLShader::GLShader(GLenum shaderType, const std::string &pathName)
+{
+    m_id = glCreateShader(shaderType);
+    setSourceFile(pathName);
+}
 
 /**
  *@brief get shader type.

@@ -13,7 +13,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-
+#include <cassert>
 
 
  
@@ -28,6 +28,7 @@ class GLShader
 {
 public:
     GLShader(GLenum shaderType);
+    GLShader(GLenum shaderType, const std::string&pathName);
     void setSourceFile(const std::string &pathName);
     void setSource(const std::string &src);
     GLenum getShaderType();
