@@ -50,7 +50,7 @@ public:
     bool isProgram();
     bool link();
     void use();
-    void setProgramId(GLuint programId);
+    GLuint setProgramId(GLuint programId);
     GLuint getProgramId();
     //glGetActiveAttrib
     //glGetProgramInterfaceiv

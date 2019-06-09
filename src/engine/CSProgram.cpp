@@ -287,10 +287,12 @@ GLProgram::use()
 /**
  *@brief set gl program
  */
-void
+GLuint
 GLProgram::setProgramId(GLuint programId)
 {
+    GLuint id = m_id;
     m_id = programId;
+    return id;
 }
 
 /**
