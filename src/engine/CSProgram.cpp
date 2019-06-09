@@ -303,3 +303,14 @@ GLProgram::getProgramId()
 {
     return m_id;
 }
+
+/**
+ *@brief delete program
+ *@note frees the memory and invalidates the name associated with the program object specified by program.​If a program object is in use as part of current rendering state, it will be flagged for deletion, but it will not be deleted until it is no longer part of current state for any rendering context.
+ *@details ref glDeleteProgram
+ */
+void
+GLProgram::destroy()
+{
+    glDeleteProgram(m_id);
+}

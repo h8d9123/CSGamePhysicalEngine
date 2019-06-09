@@ -40,6 +40,7 @@ public:
     bool compile();
     GLuint getShaderId();
     GLuint setShaderId(GLuint shaderId);
+    void destroy();
     bool isShader();
     
 private:

@@ -52,6 +52,7 @@ public:
     void use();
     GLuint setProgramId(GLuint programId);
     GLuint getProgramId();
+    void destroy();
     //glGetActiveAttrib
     //glGetProgramInterfaceiv
     //glGetProgramResourceiv

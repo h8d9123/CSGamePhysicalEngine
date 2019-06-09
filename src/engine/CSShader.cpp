@@ -196,3 +196,14 @@ GLShader::isShader()
 {
     return glIsShader(m_id);
 }
+
+/*
+* @brief frees the memory and invalidates the name associated with the shader objec
+* @note If a shader object to be deleted is attached to a program object, it will be flagged for deletion, but it will not be deleted until it is no longer attached to any program object.
+*@details ref. glDeleteShader()
+*/
+void
+GLShader::destroy()
+{
+    glDeleteShader(m_id);
+}
