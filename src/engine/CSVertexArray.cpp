@@ -46,3 +46,27 @@ GLBufferObject::bind()
 {
     glBindBuffer(m_type, m_id);
 }
+
+GLTextureObject::GLTextureObject(GLenum target)
+    :m_id(0), m_type(target)
+{
+    glGenTextures(1, &m_id);
+}
+
+GLboolean
+GLTextureObject::isTexture()
+{
+    return glIsTexture(m_id);
+}
+
+void
+GLTextureObject::bind()
+{
+    glBindTexture(m_type, m_id); 
+}
+
+void
+GLTextureObject::destroy()
+{
+    glDeleteTextures(1, &m_id);
+}

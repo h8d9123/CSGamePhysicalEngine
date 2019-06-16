@@ -44,3 +44,15 @@ private:
     GLenum m_type;
 };
 
+
+class GLTextureObject
+{
+public:
+    GLTextureObject(GLenum target);
+    GLboolean isTexture();
+    void bind();
+    void destroy();
+private:
+    GLuint m_id;
+    GLenum m_type;
+};
