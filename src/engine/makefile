@@ -6,6 +6,7 @@ OBJS=csengine
 CC=$(MINGW_HOME)/bin/g++
 INC=-I$(MINGW_GL_INCLUDE) \
 	-I$(PROJECT_DIR)/3rd/local/windows/include \
+	-I$(PROJECT_DIR)/3rd/stb \
 	-I$(PROJECT_DIR)/3rd/local/windows/glew/include \
 	-I.
 

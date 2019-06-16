@@ -1,47 +1,48 @@
-#include "GLVertexArray.h"
+#include "CSVertexArray.h"
 
-GLVertexArray::GLVertexArray():m_id(0)
+GLVertexArrayObject::GLVertexArrayObject():m_id(0)
 {
     glGenVertexArrays(1, &m_id);
 }
 
 
 GLboolean
-GLVertexArray::isVertexArray()
+GLVertexArrayObject::isVertexArray()
 {
     return glIsVertexArray(m_id);
 }
 
 void
-GLVertexArray::destroy()
+GLVertexArrayObject::destroy()
 {
     glDeleteVertexArrays(1, &m_id);
 }
 
 void
-GLVertexArray::bind()
+GLVertexArrayObject::bind()
 {
     glBindVertexArray(m_id); 
 }
 
-GLBuffer::GLBuffer(GLenum target):m_id(0), m_type(target)
+GLBufferObject::GLBufferObject(GLenum target):m_id(0), m_type(target)
 {
     glGenBuffers(1, &m_id);
 }
 
 GLboolean
-GLBuffer::isBuffer()
+GLBufferObject::isBuffer()
 {
     return glIsBuffer(m_id); 
 }
 
-void destroy()
+void
+GLBufferObject::destroy()
 {
     glDeleteBuffers(1, &m_id);
 }
 
 void
-GLBuffer::bind()
+GLBufferObject::bind()
 {
     glBindBuffer(m_type, m_id);
 }

@@ -1,4 +1,4 @@
-
+#include "CSBase.h"
 class GLVertexAttrSetter
 {
 public:
@@ -16,12 +16,12 @@ public:
 class GLVertexArrayObject
 {
 public:
-    GLVertexArray();
+    GLVertexArrayObject();
     GLboolean isVertexArray();
     void destroy();
     void bind();
-    void setAttr(const GLVertexAttrSetter &setter) {setter.set();}
-    void setData(const GLVertexDataSetter &setter) {setter.set();}
+    void setAttr(GLVertexAttrSetter &setter) {setter.set();}
+    void setData(GLVertexDataSetter &setter) {setter.set();}
     
 private:
     GLuint m_id;
@@ -31,9 +31,9 @@ private:
 class GLBufferObject
 {
 public:
-    GLBuffer(GLenum target);
+    GLBufferObject(GLenum target);
     GLboolean isBuffer();
-    destroy();
+    void destroy();
     void bind();
     //glBindBufferBase
     //glBindBufferRange
